@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipe Of the Day</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="nav"></div>
+</body>
+</html>
+<script type="module">
+    import navbar from './components/navbar.js';
+    import { getData, appendData } from './script/recShowData.js';
+
+    let nav_div = document.getElementById("nav");
+    nav_div.innerHTML = navbar();
+
+    function typeF(){
+
+        let res = getData(`https://www.themealdb.com/api/json/v1/1/random.php`);
+
+        res.then((data) => {
+
+            let parent = document.getElementById("data");
+
+            appendData(data, parent);
+            console.log(data);
+
+        })
+    }
+    typeF();
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+    <div id="nav"></div>
+    <input type="text" placeholder="Search" id="test" oninput="typeF()" />
+    <button>Submit</button>
+
+</body>
+
+</html>
+<script type="module">
+
+    import navbar from './components/navbar.js';
+    import { getData, appendData } from './script/recShowData.js';
+
+    let nav_div = document.getElementById("nav");
+    nav_div.innerHTML = navbar();
+
+    let div_head = document.createElement("h2")
+    div_head.innerHTML = "Search Receipe"
+    
+    var input = document.getElementById("test");
+    input.before(div_head);
+
+    function typeF(){
+        var i = document.getElementById("test").value;
+        console.log(i)
+
+        let res = getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${i}`);
+
+        res.then((data) => {
+
+            let parent = document.getElementById("data");
+
+            appendData(data, parent);
+            console.log(data);
+
+        })
+    }
+    //www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+
+
+</script>
